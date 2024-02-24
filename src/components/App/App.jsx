@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { lazy } from 'react';
 import Layout from 'components/Layout/Layout';
 
@@ -8,7 +8,7 @@ const Favorites = lazy(() => import('../../pages/favorites/Favorites'));
 
 export default function App() {
   return (
-    <Router>
+    // <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -17,7 +17,7 @@ export default function App() {
           <Route path="*" element={<Home />} />
         </Route>
       </Routes>
-    </Router>
+    // </Router>
 
   );
 }
