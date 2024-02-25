@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CarItem from 'components/CarItem/CarItem';
-import { LoadMoreButton, WrapperFilter, WrapperList } from './Catalog.styled';
+import { LoadMore, WrapperFilter, WrapperList } from './Catalog.styled';
 import Filter from 'components/Filter/Filter';
-import { useGetCarsOnPage } from '../../redux/cars';
+import { useGetCarsOnPage } from '../../redux/operations';
+import { Loader } from 'components/Loader/Loader';
 
 export default function Catalog() {
   const [page, setPage] = useState(1);
+  const [allCars, setAllCars] = useState([]);
   const { data, error, isLoading, isFetching } = useGetCarsOnPage(page);
 
   const loadMore = () => {
     setPage(page + 1);
   };
 
-  const allCars = data ? data.reduce((acc, curr) => acc.concat(curr), []) : [];
+   useEffect(() => {
+    if (data) {
+      
+      setAllCars(prevCars => [...prevCars, ...data]);
+    }
+  }, [data]);
 
   return (
     <>
@@ -21,9 +28,9 @@ export default function Catalog() {
       </WrapperFilter>
       <WrapperList>
         {error ? (
-          <>Ой, произошла ошибка</>
+          <>Oops, there was an error...</>
         ) : isLoading ? (
-          <>Загрузка...</>
+          <Loader />
         ) : allCars.length > 0 ? (
           <>
             {allCars.map(car => (
@@ -33,9 +40,9 @@ export default function Catalog() {
         ) : null}
       </WrapperList>
       {data && data.length >= 8 && (
-        <LoadMoreButton onClick={loadMore} disabled={isFetching}>
-          Load More
-        </LoadMoreButton>
+        <LoadMore onClick={loadMore} disabled={isFetching}>
+          Load more
+        </LoadMore>
       )}
     </>
   );

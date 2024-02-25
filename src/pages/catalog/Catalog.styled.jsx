@@ -13,26 +13,28 @@ export const WrapperList = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 50px 29px;
-  padding-left: 128px;
-  padding-right: 128px;
+  width: 1184px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 50px;
 `;
 
-export const LoadMoreButton = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
+export const LoadMore = styled.a`
+  color: #3470ff;
+  font-family: 'Manrope';
   font-size: 16px;
-  border-radius: 5px;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
+    font-style: normal;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration-line: underline;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  cursor: pointer;
+
   &:hover {
-    background-color: #0056b3;
-  }
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    color: #0b44cd;
   }
 `;
